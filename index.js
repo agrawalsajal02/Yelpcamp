@@ -17,9 +17,19 @@ var express=	require("express"),
 	
 app.use(flash());
 app.use(express.static(__dirname+"/public"));
-mongoose.connect("mongodb://localhost/yelp_campv4",function(err){
-	console.log("db is connected");
+
+
+mongoose.connect('mongodb+srv://sajalagrawal14:1999%40sajal@cluster0-r0es2.mongodb.net/test?retryWrites=true&w=majority', {
+	useNewUrlParser: true,
+	useCreateIndex: true
+}).then(() => {
+	console.log('Connected to DB!');
+}).catch(err => {
+	console.log('ERROR:', err.message);
 });
+
+const port = process.env.PORT || 5000
+
 //seed();
 
 app.use(bodyparser.urlencoded({extended : true}));
@@ -59,7 +69,7 @@ res.render("contact.ejs");
 //==========================
 
 
-app.listen(9000,function(){
+app.listen(port,function(){
 	console.log("server is started");
 						  });
 
